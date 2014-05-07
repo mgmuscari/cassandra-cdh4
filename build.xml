@@ -25,7 +25,7 @@
     <property name="debuglevel" value="source,lines,vars"/>
 
     <!-- default version and SCM information -->
-    <property name="base.version" value="1.2.16"/>
+    <property name="base.version" value="1.2.16-cdh4"/>
     <property name="scm.connection" value="scm:git://git.apache.org/cassandra.git"/>
     <property name="scm.developerConnection" value="scm:git://git.apache.org/cassandra.git"/>
     <property name="scm.url" value="http://git-wip-us.apache.org/repos/asf?p=cassandra.git;a=tree"/>
@@ -67,7 +67,7 @@
     <condition property="version" value="${base.version}">
       <isset property="release"/>
     </condition>
-    <property name="version" value="${base.version}-SNAPSHOT"/>
+    <property name="version" value="${base.version}"/>
     <property name="version.properties.dir"
               value="${build.classes.main}/org/apache/cassandra/config/" />
     <property name="final.name" value="${ant.project.name}-${version}"/>
@@ -276,7 +276,7 @@
       <artifact:remoteRepository id="central"   url="${artifact.remoteRepository.central}"/>
       <artifact:remoteRepository id="java.net2" url="${artifact.remoteRepository.java.net2}"/>
       <artifact:remoteRepository id="apache"    url="${artifact.remoteRepository.apache}"/>
-
+      <artifact:remoteRepository id="cloudera"  url="${artifact.remoteRepository.cloudera}"/>
       <macrodef name="install">
         <attribute name="pomFile"/>
         <attribute name="file"/>
@@ -370,7 +370,7 @@
           <dependency groupId="org.apache.rat" artifactId="apache-rat" version="0.6">
              <exclusion groupId="commons-lang" artifactId="commons-lang"/>
           </dependency>
-          <dependency groupId="org.apache.hadoop" artifactId="hadoop-core" version="1.0.3"/>
+          <dependency groupId="org.apache.hadoop" artifactId="hadoop-client" version="2.0.0-mr1-cdh4.2.0"/>
           <dependency groupId="org.apache.hadoop" artifactId="hadoop-minicluster" version="1.0.3"/>
           <dependency groupId="org.apache.pig" artifactId="pig" version="0.10.0"/>
           <dependency groupId="net.sf.jopt-simple" artifactId="jopt-simple" version="3.2"/>
@@ -418,7 +418,7 @@
         <dependency groupId="junit" artifactId="junit"/>
         <dependency groupId="commons-logging" artifactId="commons-logging"/>
         <dependency groupId="org.apache.rat" artifactId="apache-rat"/>
-        <dependency groupId="org.apache.hadoop" artifactId="hadoop-core"/>
+        <dependency groupId="org.apache.hadoop" artifactId="hadoop-client" version="2.0.0-mr1-cdh4.2.0"/>
       	<dependency groupId="org.apache.hadoop" artifactId="hadoop-minicluster"/>
         <dependency groupId="org.apache.pig" artifactId="pig"/>
         <dependency groupId="net.sf.jopt-simple" artifactId="jopt-simple"/>
@@ -537,6 +537,7 @@
                              dependencyRefsBuildFile="${build.dir}/build-dependencies.xml">
           <remoteRepository refid="central"/>
           <remoteRepository refid="apache"/>
+          <remoteRepository refid="cloudera"/>
           <remoteRepository refid="java.net2"/>
       </artifact:dependencies>
       <artifact:dependencies pomRefId="coverage-deps-pom"
@@ -562,6 +563,7 @@
                              dependencyRefsBuildFile="${build.dir}/test-dependencies.xml">
         <remoteRepository refid="apache"/>
         <remoteRepository refid="central"/>
+        <remoteRepository refid="cloudera"/>
         <remoteRepository refid="jclouds"/>
         <remoteRepository refid="oauth"/>
       </artifact:dependencies>
